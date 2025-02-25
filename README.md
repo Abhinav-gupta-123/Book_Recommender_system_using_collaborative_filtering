@@ -1,9 +1,13 @@
 🍽️ Restaurant Rating Prediction - ML Model
 
 
-## 🖼️ Project Screenshot  
+🖼️ Project Screenshot 
+
+
 
 Here’s a preview of the **Restaurant Rating Prediction** web app:  
+
+
 
 ![Restaurant Rating Prediction](screeshot.jpg)
 
