@@ -84,17 +84,34 @@ The dataset includes various restaurant-related attributes such as:
 
 
 
+
 🏗️ Project Structure
 
 
 📂 Restaurant-Rating-Predictor
+
+
 ├── 📂 datasets/ → Dataset files
+
+
 ├── 📂 models/ → Trained ML models
+
+
 ├── 📂 EDA_Outputs/ → HTML reports of EDA
+
+
 ├── 📜 app.py → Streamlit application
+
+
 ├── 📜 model_training.ipynb → Jupyter Notebook for model training
+
+
 ├── 📜 requirements.txt → Dependencies file
+
+
 └── 📜 README.md → Project documentation
+
+
 
 
 
@@ -116,6 +133,7 @@ pip install -r requirements.txt
 
 
 
+
     
 📌 Key Features
 
@@ -134,6 +152,7 @@ pip install -r requirements.txt
 
 
 
+
 🔮 Future Enhancements
 
 
@@ -144,6 +163,7 @@ pip install -r requirements.txt
 
 
 🚀 Deploy the application on cloud platforms like AWS/GCP
+
 
 
 
