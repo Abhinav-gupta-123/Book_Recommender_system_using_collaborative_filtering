@@ -1,6 +1,15 @@
 🍽️ Restaurant Rating Prediction - ML Model
 
 
+## 🖼️ Project Screenshot  
+
+Here’s a preview of the **Restaurant Rating Prediction** web app:  
+
+![Restaurant Rating Prediction](screeshot.jpg)
+
+
+
+
 📌 A Machine Learning-based project to predict restaurant ratings based on various features.
 
 
