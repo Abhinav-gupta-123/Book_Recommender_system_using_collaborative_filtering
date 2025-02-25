@@ -83,6 +83,7 @@ The dataset includes various restaurant-related attributes such as:
 
 
 
+
 🏗️ Project Structure
 
 
@@ -94,6 +95,7 @@ The dataset includes various restaurant-related attributes such as:
 ├── 📜 model_training.ipynb → Jupyter Notebook for model training
 ├── 📜 requirements.txt → Dependencies file
 └── 📜 README.md → Project documentation
+
 
 
 
@@ -113,6 +115,7 @@ pip install -r requirements.txt
     streamlit run app.py
 
 
+
     
 📌 Key Features
 
@@ -130,6 +133,7 @@ pip install -r requirements.txt
 
 
 
+
 🔮 Future Enhancements
 
 
@@ -143,6 +147,7 @@ pip install -r requirements.txt
 
 
 
+
 🏆 Contribution
 
 
@@ -150,6 +155,8 @@ Want to contribute? 🤝
 
 
 Feel free to fork the repo, create a new branch, and submit a pull request. If you encounter any bugs or have suggestions, raise an issue.
+
+
 
 📢 Contact
 📩 Email: abhinavg963@gmail.com
