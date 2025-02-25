@@ -9,7 +9,7 @@ Here’s a preview of the **Restaurant Rating Prediction** web app:
 
 
 
-![Restaurant Rating Prediction](screeshot.jpg)
+![Restaurant Rating Prediction](resturant_rating/screeshot.jpg)
 
 
 
