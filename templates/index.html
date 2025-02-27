@@ -4,30 +4,49 @@
     <meta charset="UTF-8">
     <title>Book Recommender System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Particle.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         body {
-            background-color: black;
+            background-color: #121212;
             font-family: 'Arial', sans-serif;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Particle.js Container */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         .navbar {
-            background-color: #00a65a;
-            border-radius: 0;
+            background: linear-gradient(135deg, #00a65a, #007bff);
             padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
         }
 
         .navbar-brand {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             color: white !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .nav > li > a {
             color: white !important;
             font-size: 16px;
             padding: 12px 15px;
+            transition: background-color 0.3s ease;
         }
 
         .nav > li > a:hover {
@@ -35,12 +54,10 @@
             border-radius: 5px;
         }
 
-        .text-white {
-            color: white;
-        }
-
         .container {
             margin-top: 30px;
+            position: relative;
+            z-index: 1000;
         }
 
         h1 {
@@ -48,20 +65,40 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .card {
-            background-color: #1e1e1e;
+            background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
+            transition: opacity 0.5s ease;
+            opacity: 0;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card img {
@@ -69,6 +106,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
+            margin-bottom: 15px;
         }
 
         .card p, .card h4 {
@@ -76,13 +114,30 @@
             font-weight: bold;
         }
 
+        .card h4 {
+            color: #00a65a; /* Reverted to original color */
+        }
+
         .col-md-3 {
             margin-top: 30px;
         }
 
+        .text-white {
+            color: white;
+        }
+
+        .text-muted {
+            color: #888 !important;
+        }
+
+        .card p {
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
+    <!-- Particle.js Background -->
+    <div id="particles-js"></div>
 
     <nav class="navbar">
         <a class="navbar-brand">My Book Recommender</a>
@@ -102,7 +157,7 @@
                         <div class="card-body">
                             <img class="card-img-top" src="{{ image[i] }}" alt="Book Cover">
                             <p class="text-white">{{ book_name[i] }}</p>
-                            <h4 class="text-white">{{ author[i] }}</h4>
+                            <h4 class="text-muted">{{ author[i] }}</h4>
                             <h4 class="text-white">Votes - {{ votes[i] }}</h4>
                             <h4 class="text-white">Rating - {{ rating[i] }}</h4>
                         </div>
@@ -112,5 +167,113 @@
         </div>
     </div>
 
+    <!-- Particle.js Configuration -->
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html>
