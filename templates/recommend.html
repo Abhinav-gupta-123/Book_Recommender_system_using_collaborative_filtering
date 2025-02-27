@@ -5,7 +5,7 @@
     <title>Book Recommender System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <!-- Particle.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -16,8 +16,6 @@
             margin: 0;
             overflow-x: hidden;
         }
-
-        /* Particle.js Container */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -26,7 +24,6 @@
             left: 0;
             z-index: -1;
         }
-
         .navbar {
             background: linear-gradient(135deg, #00a65a, #007bff);
             padding: 10px 20px;
@@ -34,41 +31,26 @@
             position: relative;
             z-index: 1000;
         }
-
         .navbar-brand {
             font-size: 24px;
             font-weight: bold;
             color: white !important;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-
         .nav > li > a {
             color: white !important;
             font-size: 16px;
             padding: 12px 15px;
-            transition: background-color 0.3s ease;
         }
-
-        .nav > li > a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-        }
-
         .container {
             margin-top: 30px;
             position: relative;
             z-index: 1000;
         }
-
         h1 {
             font-size: 50px;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 20px;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -76,74 +58,38 @@
             background: rgba(30, 30, 30, 0.8);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
-
         input[type="text"] {
             height: 45px;
             border-radius: 5px;
-            border: 1px solid #444;
             padding: 10px;
             font-size: 16px;
             width: 100%;
             background-color: #1e1e1e;
             color: white;
-            transition: border-color 0.3s ease;
         }
-
-        input[type="text"]:focus {
-            border-color: #00a65a;
-            outline: none;
-        }
-
         input[type="submit"] {
             background: linear-gradient(135deg, #ff9800, #e68a00);
             color: white;
-            border: none;
             padding: 12px 20px;
             font-size: 18px;
             border-radius: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-top: 15px;
         }
-
-        input[type="submit"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+        .error-message {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
         }
-
         .card {
             background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
             padding: 15px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
+            margin-top: 30px;
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
-            transition: opacity 0.5s ease;
-            opacity: 0;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
         .card img {
             width: 100%;
             height: 200px;
@@ -151,35 +97,9 @@
             border-radius: 10px;
             margin-bottom: 15px;
         }
-
-        .card p, .card h4 {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .card h4 {
-            color: #00a65a;
-        }
-
-        .col-md-3 {
-            margin-top: 30px;
-        }
-
-        .text-white {
-            color: white;
-        }
-
-        .text-muted {
-            color: #888 !important;
-        }
-
-        .card p {
-            color: #ccc;
-        }
     </style>
 </head>
 <body>
-    <!-- Particle.js Background -->
     <div id="particles-js"></div>
 
     <nav class="navbar">
@@ -191,22 +111,24 @@
     </nav>
 
     <div class="container">
-        <h1 class="text-white">Recommend Books</h1>
+        <h1>Recommend Books</h1>
         <form action="/recommend_books" method="post">
             <input name="user_input" type="text" class="form-control" placeholder="Search for a book..."><br>
             <input type="submit" class="btn btn-lg btn-warning" value="Recommend">
         </form>
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
 
         <div class="row">
             {% if data %}
                 {% for i in data %}
                     <div class="col-md-3">
                         <div class="card">
-                            <div class="card-body">
-                                <img class="card-img-top" src="{{i[2]}}" alt="Book Cover">
-                                <p class="text-white">{{i[0]}}</p>
-                                <h4 class="text-white">{{i[1]}}</h4>
-                            </div>
+                            <img class="card-img-top" src="{{ i[2] }}" alt="Book Cover">
+                            <p class="text-white">{{ i[0] }}</p>
+                            <h4 class="text-white">{{ i[1] }}</h4>
                         </div>
                     </div>
                 {% endfor %}
@@ -214,112 +136,16 @@
         </div>
     </div>
 
-    <!-- Particle.js Configuration -->
     <script>
         particlesJS('particles-js', {
             particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#ffffff'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    },
-                    polygon: {
-                        nb_sides: 5
-                    }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                    anim: {
-                        enable: false,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: false,
-                        speed: 40,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffffff',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 6,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'repulse'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 400,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    bubble: {
-                        distance: 400,
-                        size: 40,
-                        duration: 2,
-                        opacity: 8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
-                    },
-                    remove: {
-                        particles_nb: 2
-                    }
-                }
-            },
-            retina_detect: true
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                move: { enable: true, speed: 6 }
+            }
         });
     </script>
 </body>
