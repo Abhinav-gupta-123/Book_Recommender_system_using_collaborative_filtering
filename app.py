@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import pickle
 import numpy as np
 
@@ -25,9 +25,15 @@ def index():
 def recommend_ui():
     return render_template('recommend.html', data=None, error_message=None)
 
-@app.route('/recommend_books', methods=['POST'])
+@app.route('/recommend_books', methods=['POST', 'GET'])
 def recommend():
-    user_input = request.form.get('user_input')
+    if request.method == 'POST':
+        user_input = request.form.get('user_input')
+    else:  # If it's a GET request, check for a query parameter (optional)
+        user_input = request.args.get('book', '')
+
+    if not user_input:
+        return redirect(url_for("recommend_ui"))
 
     # Check if the book exists in the dataset
     if user_input not in pt.index:
