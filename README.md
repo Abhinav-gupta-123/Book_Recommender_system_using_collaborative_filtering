@@ -129,8 +129,16 @@ If not, an error message (in red) will be displayed below the search button.
 
 
 👨‍💻 Contributors
+
+
 🔹 Abhinav Gupta (Project Developer)
+
+
 🔹 Code Tech IT Solution (Internship Task)
 
+
+
 📜 License
+
+
 This project is for educational purposes. Feel free to fork and modify it.
